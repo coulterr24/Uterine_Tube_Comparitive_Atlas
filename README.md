@@ -10,6 +10,10 @@ The available code investigates the transcriptomic landscape of the human and mo
 +  `Raw Mouse Data`: raw and processed scRNA-seq data for distal and proximal mouse uterine tubes. [GSE252786](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE252786)
 +  `Human Seurat and SAMap Objects`: completely processed objects for quick analysis of cell types within the human uterine tube. Additional SAMap files for comparison cross-species comparisons. [LINK](https://datadryad.org/) [active upon publication]
 +  `Raw Human Data`: raw and processed scRNA-seq data for our own samples mouse uterine tubes. [GSE324855](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi) [active upon publication]
++  +  # Additional files were obtained from:
+   +  Dinh et al [GSE151214](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151214)
+   +  Ulrich et al [GSE178101](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178101)
+   +  Lengyel et al [EGAC00001003114](https://ega-archive.org/datasets/EGAD00001010076)
 
 ### Subdirectories
 + `Correlation_Analysis`: csv and xlsx files required for establishing a reference of correlated/specific gene pairs.
