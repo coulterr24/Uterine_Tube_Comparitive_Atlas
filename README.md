@@ -12,13 +12,16 @@ The available code investigates the transcriptomic landscape of the human and mo
 +  `Raw Human Data`: raw and processed scRNA-seq data for our own samples mouse uterine tubes. [GSE324855](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi) [active upon publication]
 
 ### Subdirectories
-+ `Data_Preprocessing`: quality control and object preparation for distal/proximal datasets and epithelial subsets.
++ `Correlation_Analysis`: csv and xlsx files required for establishing a reference of correlated/specific gene pairs.
 
-+ `Figure_Scripts`: code necessary for recreating figures from the manuscript.
++ `R_Figure_Scripts`: code necessary for recreating figures from the manuscript.
 
-+ `Reproducibility`: information necessary to recreate conclusions and to spark further exploration.
++ `SAMap_Preprocessing_and_Figures`: code for the preparation of SAMap objects and recreating figures from the manuscript.
+
++ `Seurat_Preprocessing`: quality control and object preparation for human datasets and epithelial subsets.
 
 ## Contact:
+Coulter Q. Ralston (cqr3@cornell.edu) <br>
 Alexander Yu. Nikitin (an58@cornell.edu) <br>
 Benjamin D. Cosgrove (bdc68@cornell.edu) <br>
-Coulter Q. Ralston (cqr3@cornell.edu) <br>
+
