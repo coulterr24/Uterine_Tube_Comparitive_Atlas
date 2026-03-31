@@ -2,7 +2,7 @@
 The available code investigates the transcriptomic landscape of the human and mouse uterine tube, applies lineage trajectories, and maps sequencing data across species.
 
 ### Preprint Link:
-[Ralston, et al., _bioRxiv_, 2026](https://www.biorxiv.org/)
+[Ralston, et al., _bioRxiv_, 2026](https://www.biorxiv.org/content/10.64898/2026.03.26.714557v1)
 
 ### Data Availability:
 +  `Mouse Seurat Objects`: completely processed objects for quick analysis of cell types within the mouse uterine tube. [LINK](https://doi.org/10.5061/dryad.4mw6m90hm)
