@@ -37,55 +37,67 @@ library(tidyr)
 
 Human_HQ_Cells <- readRDS(file = "20241212_FT_Healthy_Cells_Final.rds", refhook = NULL)
 
-FT_Named <- RenameIdents(Human_HQ_Cells, 
-                         '0' = "T/NK Cell 1", 
-                         '1' = "Fibroblast 1", 
-                         '2' = "Secretory Epithelial 1",
-                         '3' = "Fibroblast 2", 
-                         '4' = "T/NK Cell 2", 
-                         '5' = "T/NK Cell 3", 
-                         '6' = "Macrophage",
-                         '7' = "Ciliated Epithelial",
-                         '8' = "Blood Endothelial", 
-                         '9' = "Pericyte", 
-                         '10' = "Smooth Muscle 1", 
-                         '11' = "Lymph Endothelial", 
-                         '12' = "Mast", 
-                         '13' = "Secretory Epithelial 2", 
-                         '14' = "B Cell", 
-                         '15' = "Cycling Immune", 
-                         '16' = "T/NK Cell 4",
-                         '17' = "T/NK Cell 5",
-                         '18' = "Smooth Muscle 2",
-                         '19' = "Secretory Epithelial 3")
+FT_Named <- Human_HQ_Cells
+Idents(FT_Named) <- "Location"
+FT_Named <- subset(FT_Named, idents = c("Isthmus","Ampulla","Fimbria"))
 
-
+Idents(FT_Named) <- "seurat_clusters"
+FT_Named <- RenameIdents(FT_Named, 
+                       '0' = "T/NK Cell 1", 
+                       '1' = "Fibroblast 1", 
+                       '2' = "Secretory Epithelial 1",
+                       '3' = "Fibroblast 2", 
+                       '4' = "T/NK Cell 2", 
+                       '5' = "T/NK Cell 3", 
+                       '6' = "Macrophage",
+                       '7' = "Ciliated Epithelial",
+                       '8' = "Blood Endothelial", 
+                       '9' = "Pericyte", 
+                       '10' = "Smooth Muscle 1", 
+                       '11' = "Lymph Endothelial", 
+                       '12' = "Mast", 
+                       '13' = "Secretory Epithelial 2", 
+                       '14' = "B Cell", 
+                       '15' = "Cycling Immune", 
+                       '16' = "T/NK Cell 4",
+                       '17' = "T/NK Cell 5",
+                       '18' = "Smooth Muscle 2",
+                       '19' = "Secretory Epithelial 3")
 FT_Named@active.ident <- factor(x = FT_Named@active.ident, 
-                                levels = 
-                                  c("Fibroblast 1",
-                                    "Fibroblast 2", 
-                                    "Smooth Muscle 1", 
-                                    "Smooth Muscle 2", 
-                                    "Pericyte",
-                                    "Blood Endothelial",
-                                    "Lymph Endothelial",
-                                    "Secretory Epithelial 1", 
-                                    "Secretory Epithelial 2", 
-                                    "Secretory Epithelial 3",
-                                    "Ciliated Epithelial",
-                                    "T/NK Cell 1", 
-                                    "T/NK Cell 2",
-                                    "T/NK Cell 3",
-                                    "T/NK Cell 4",
-                                    "T/NK Cell 5",
-                                    "Cycling Immune", 
-                                    "B Cell", 
-                                    "Macrophage", 
-                                    "Mast"))
+                              levels = 
+                                c("Fibroblast 1",
+                                  "Fibroblast 2", 
+                                  "Smooth Muscle 1", 
+                                  "Smooth Muscle 2", 
+                                  "Pericyte",
+                                  "Blood Endothelial",
+                                  "Lymph Endothelial",
+                                  "Secretory Epithelial 1", 
+                                  "Secretory Epithelial 2", 
+                                  "Secretory Epithelial 3",
+                                  "Ciliated Epithelial",
+                                  "T/NK Cell 1", 
+                                  "T/NK Cell 2",
+                                  "T/NK Cell 3",
+                                  "T/NK Cell 4",
+                                  "T/NK Cell 5",
+                                  "Cycling Immune", 
+                                  "B Cell", 
+                                  "Macrophage", 
+                                  "Mast"))
+FT_Named$Location <- factor(FT_Named$Location, levels = c('Isthmus', 'Ampulla', 'Fimbria'))
+
+
+
+
 
 
 
 Mouse_HQ_Cells <- readRDS(file = "20220805_Mouse_HQ_Cells.rds" , refhook = NULL)
+
+Idents(Mouse_HQ_Cells) <- "Location"
+Mouse_HQ_Cells <- subset(Mouse_HQ_Cells, idents = c("Distal","Proximal"))
+Idents(Mouse_HQ_Cells) <- "seurat_clusters"
 
 UT_Named <- RenameIdents(Mouse_HQ_Cells, 
                          '0' = "Fibroblast 1", 
@@ -126,16 +138,19 @@ UT_Named@active.ident <- factor(x = UT_Named@active.ident,
                                         "Fibroblast 2", 
                                         "Fibroblast 1")))
 
+
 #### Supp Figure 4A ####
+
+
 
 
 Fibroblasts <- c('#FF9D00' , '#FFB653' , '#FFCB9A')   # Oranges
 Muscle <- c('#E55451' , '#FFB7B2') # Reds
-Endothelial <- c('#8D021F')  # Reds
-FiboEpi <- "#ffad77" # Reddish Brown
-Epi <-c('#6E3E6E','#8A2BE2','#604791','#CCCCFF','#DA70D6','#DF73FF') # Blues/Purples
-Immune <- c( "#238B45", "#7FFFD4", '#FC86AA') # Yellowish Brown
-Meso <- 'darkgrey' # Pink
+Endothelial <- c('#A0E6FF' , "#a0ffd9")  # Reds
+FiboEpi <- "#FFE0B3" # Reddish Brown
+Epi <-c('#6E3E6E','#8A2BE2','#bb1df0','#DF73FF') # Blues/Purples
+Immune <- c( '#5A5E6B'  , '#B8C2CC' , '#FC86AA') # Yellowish Brown
+Meso <- "#9EFFFF" # Pink
 Lut <- "#9DCC00" # Green
 
 colors <- c(Fibroblasts, Muscle, Endothelial, FiboEpi, Epi, Immune, Meso, Lut)
@@ -144,33 +159,33 @@ colors <- c(Fibroblasts, Muscle, Endothelial, FiboEpi, Epi, Immune, Meso, Lut)
 table <- table(UT_Named@meta.data$Location ,
                UT_Named@active.ident)    # Create a table of counts
 
-IDs = c("Fibroblast 1",
-        "Fibroblast 2", 
-        "Smooth Muscle 1", 
-        "Smooth Muscle 2", 
-        "Pericyte",
-        "Blood Endothelial",
-        "Lymph Endothelial",
-        "Secretory Epithelial 1", 
-        "Secretory Epithelial 2", 
-        "Secretory Epithelial 3",
-        "Ciliated Epithelial",
-        "T Cell 1", 
-        "T Cell 2",
-        "T Cell 3",
-        "T Cell 4",
-        "T Cell 5",
-        "Cycling Immune", 
-        "B Cell", 
-        "Macrophage", 
-        "Mast")
+
+IDs <- c("Fibroblast 1",
+         "Fibroblast 2",
+         "Fibroblast 3",
+         "Smooth Muscle", 
+         "Pericyte",
+         "Blood Endothelial",
+         "Lymphatic Endothelial",
+         "Epithelial/Fibroblast",
+         "Stem-like Epithelial",
+         "Ciliated Epithelial 1",
+         "Ciliated Epithelial 2",
+         "Secretory Epithelial",
+         "T-Cell",
+         "Macrophage",
+         "Erythrocyte",
+         "Mesothelial",
+         "Luteal")
+            
+
 
 df <- data.frame(table) 
 
-table2 <- table(loc@active.ident)
 
 
-age <- ggplot(data = df,                # Dataset to use for plot.  Needs to be a data.frame  
+
+Location <- ggplot(data = df,                # Dataset to use for plot.  Needs to be a data.frame  
               aes(x = Var1,              # Variable to plot on the x-axis
                   y = Freq,              # Variable to plot on the y-axis
                   fill = factor(Var2,    # Variable to fill the bars
@@ -182,7 +197,7 @@ age <- ggplot(data = df,                # Dataset to use for plot.  Needs to be 
            size = 1) +            # Size of bars
   # Color scheme
   scale_fill_manual("Location", IDs,
-                    values = hu_colors)+
+                    values = colors)+
   labs(x = NULL,                     # x-axis label
        y = "Fraction of Cells") +    # y-axis label
   theme(text = element_text(size = 15),                                      # Text size throughout the plot
@@ -190,8 +205,7 @@ age <- ggplot(data = df,                # Dataset to use for plot.  Needs to be 
         axis.text.y = element_text(color = 'black', hjust = 1))              # Text color and horizontal adjustment on y-axis
 
 
-ggsave(filename = "FigS4A_location_mouse_cell_dist.pdf", plot = age, width = 10, height = 14, dpi = 600)
-
+ggsave(filename = "FigS4A_location_mouse_cell_dist.pdf", plot = Location, width = 10, height = 14, dpi = 600)
 
 
 #### Supp Figure 4B ####
@@ -213,23 +227,28 @@ colors <- c(oranges, deeper_reds, green, blues, greens)
 table <- table(FT_Named@meta.data$Location ,
                FT_Named@active.ident)    # Create a table of counts
 
-IDs = c("Luteal",
-        "Erythrocyte",
-        "Macrophage",
-        "T-Cell",
-        "Mesothelial",
-        "Epithelial/Fibroblast",
-        "Stem-like Epithelial",
-        "Secretory Epithelial",
-        "Ciliated Epithelial 2",
-        "Ciliated Epithelial 1",
-        "Lymphatic Endothelial",
-        "Blood Endothelial",
-        "Pericyte",
-        "Smooth Muscle", 
-        "Fibroblast 3", 
+
+IDs = c("Fibroblast 1",
         "Fibroblast 2", 
-        "Fibroblast 1")
+        "Smooth Muscle 1", 
+        "Smooth Muscle 2", 
+        "Pericyte",
+        "Blood Endothelial",
+        "Lymph Endothelial",
+        "Secretory Epithelial 1", 
+        "Secretory Epithelial 2", 
+        "Secretory Epithelial 3",
+        "Ciliated Epithelial",
+        "T/NK Cell 1", 
+        "T/NK Cell 2",
+        "T/NK Cell 3",
+        "T/NK Cell 4",
+        "T/NK Cell 5",
+        "Cycling Immune", 
+        "B Cell", 
+        "Macrophage", 
+        "Mast")
+
 
 df <- data.frame(table) 
 
@@ -264,94 +283,26 @@ ggsave(filename = "202501125_cell_human_Location_dist.pdf", plot = source, width
 
 
 
-
-
-
-
-
-
-
-
-
-## Stacked Bar Location #
-
-table <- table(Epi_Filter2@meta.data$Location ,
-               Epi_Filter2@active.ident)    # Create a table of counts
-
-IDs = unique(Epi_Filter2@active.ident)
-
-df <- data.frame(table) 
-
-table2 <- table(
-  
-  y <- ggplot(data = df,                # Dataset to use for plot.  Needs to be a data.frame  
-              aes(x = Var1,              # Variable to plot on the x-axis
-                  y = Freq,              # Variable to plot on the y-axis
-                  fill = factor(Var2,    # Variable to fill the bars
-                                levels = c("KRT7+ Secretory", 
-                                           "PAX8+/LGR5+ Progenitor",
-                                           "TEX14+ Progenitor",
-                                           "HPSE2+ Progenitor",
-                                           "APOA1+ Progenitor",
-                                           "KRT5+ Progenitor",
-                                           "AGBL4+/MAPK8+ Pre-Ciliated", 
-                                           "CFAP299+ Ciliated",
-                                           "TPPP3+ Ciliated")),
-              )) + # Order of the stacked bars
-    theme_classic() +               # ggplot2 theme
-    # Bar plot
-    geom_bar(position = 'fill',     # Position of bars.  Fill means the bars are stacked.
-             stat = "identity",     # Height of bars represent values in the data
-             size = 1) +            # Size of bars
-    # Color scheme
-    scale_fill_manual("Location", c("KRT7+ Secretory",
-                                    "PAX8+/LGR5+ Progenitor",
-                                    "TEX14+ Progenitor",
-                                    "HPSE2+ Progenitor",
-                                    "APOA1+ Progenitor",
-                                    "KRT5+ Progenitor",
-                                    "AGBL4+/MAPK8+ Pre-Ciliated", 
-                                    "CFAP299+ Ciliated",
-                                    "TPPP3+ Ciliated"),
-                      values = c("#B20224", #1,
-                                 '#35EFEF',
-                                 "#F28D86", #2
-                                 "#2188F7", #3
-                                 "#59D1AF", #5
-                                 '#00A1C6',
-                                 "#EA68E1", #4
-                                 "#A374B5", #8
-                                 "#9000C6"))+  
-    labs(x = NULL,                     # x-axis label
-         y = "Fraction of Cells") +    # y-axis label
-    theme(text = element_text(size = 15),                                      # Text size throughout the plot
-          axis.text.x = element_text(color = 'black', angle = 60, hjust = 1, size = 11),    # Text color, angle, and horizontal adjustment on x-axis 
-          axis.text.y = element_text(color = 'black', hjust = 1))    )         # Text color and horizontal adjustment on y-axis
-  
-  ggsave(filename = "20251020_epi_pre-cilia_location_stacked_bar.pdf" , plot = y , width = 10, height = 12, dpi =600)
-  
 #### Supp Figure 4C ####
 
   
-  FT_sub <- subset(FT_sub, idents = c("Macrophage"))
+FT_sub <- subset(FT_Named, idents = c("Macrophage"))
   
   
   
-  FT_sub$Location <- factor(FT_sub$Location, levels = c('Isthmus', 'Ampulla', 'Fimbria'))
+FT_sub$Location <- factor(FT_sub$Location, levels = c('Isthmus', 'Ampulla', 'Fimbria'))
   
   
   
-  Mphage_CCL20 <- VlnPlot(FT_sub, features = "CCL20", 
+Mphage_CCL20 <- VlnPlot(FT_sub, features = "CCL20", 
                           group.by = 'Location', 
                           #slot = "counts",
                           pt.size = 0)
   
-  ggsave(filename = "202501027_human_CCL20_MPhage_cells_violin.pdf" , plot = Mphage_CCL20 , width = 15, height = 10, dpi =600)
+ggsave(filename = "202501027_human_CCL20_MPhage_cells_violin.pdf" , plot = Mphage_CCL20 , width = 15, height = 10, dpi =600)
   
   
- 
-  
-  
+
   
   
   
@@ -375,29 +326,31 @@ table2 <- table(
   
   ggsave(filename = "202501027_mouse_Ccl20_MPhage_cells_violin.pdf" , plot = Mphage_Ccl20 , width = 15, height = 10, dpi =600)
   
+
+  
   
 #### Supp Figure 4E ####
   
   
   
   
-  Fibro_sub <- subset(FT_Named, idents = c("Fibroblast 1",
+Fibro_sub <- subset(FT_Named, idents = c("Fibroblast 1",
                                            "Fibroblast 2"))
   
   
   
-  Idents(Fibro_sub) <-  "Location"
+Idents(Fibro_sub) <-  "Location"
   
-  Fibro_sub <- subset(Fibro_sub, idents = c("Isthmus",
+Fibro_sub <- subset(Fibro_sub, idents = c("Isthmus",
                                             "Ampulla",
                                             "Fimbria"))
   
-  Fibro_sub@active.ident <- factor(Fibro_sub$Location, levels = c("Isthmus",
+Fibro_sub@active.ident <- factor(Fibro_sub$Location, levels = c("Isthmus",
                                                                   "Ampulla",
                                                                   "Fimbria"))
   
   
-  genes <- c('KCND2',
+genes <- c('KCND2',
              'POSTN',
              'KCNIP4',
              'NEGR1',
@@ -409,7 +362,7 @@ table2 <- table(
   )
   
   
-  fibro_reg_dp <- DotPlot(object = Fibro_sub,                    # Seurat object
+fibro_reg_dp <- DotPlot(object = Fibro_sub,                    # Seurat object
                           assay = 'RNA',                        # Name of assay to use.  Default is the active assay
                           features = genes,                 # List of features (select one from above or create a new one)
                           cols =  c('grey','#785AA3'),
@@ -438,8 +391,7 @@ table2 <- table(
     coord_flip()
   
   
-  ggsave(filename = "20260120_Reg_Fibrobalst_Dot_Plot_HU.pdf", plot = fibro_reg_dp, width = 6, height = 8, dpi = 600)
-  
+ggsave(filename = "20260120_Reg_Fibrobalst_Dot_Plot_HU.pdf", plot = fibro_reg_dp, width = 6, height = 8, dpi = 600)
   
   
   
@@ -449,22 +401,22 @@ table2 <- table(
   
   
   
-  Macro_sub <- subset(FT_Named, idents = c("Macrophage"))
+Macro_sub <- subset(FT_Named, idents = c("Macrophage"))
   
   
   
-  Idents(Macro_sub) <-  "Location"
+Idents(Macro_sub) <-  "Location"
   
-  Macro_sub <- subset(Macro_sub, idents = c("Isthmus",
+Macro_sub <- subset(Macro_sub, idents = c("Isthmus",
                                             "Ampulla",
                                             "Fimbria"))
   
-  Macro_sub@active.ident <- factor(Macro_sub$Location, levels = c("Isthmus",
+Macro_sub@active.ident <- factor(Macro_sub$Location, levels = c("Isthmus",
                                                                   "Ampulla",
                                                                   "Fimbria"))
   
   
-  genes <- c('CCL20',
+genes <- c('CCL20',
              'TIMP1',
              'LGALS1',
              'LIMK2',
@@ -476,7 +428,7 @@ table2 <- table(
   )
   
   
-  macro_reg_dp <- DotPlot(object = Macro_sub,                    # Seurat object
+macro_reg_dp <- DotPlot(object = Macro_sub,                    # Seurat object
                           assay = 'RNA',                        # Name of assay to use.  Default is the active assay
                           features = genes,                 # List of features (select one from above or create a new one)
                           cols =  c('grey','#785AA3'),
@@ -505,8 +457,10 @@ table2 <- table(
     coord_flip()
   
   
-  ggsave(filename = "20260120_Reg_Macrophage_Dot_Plot_HU.pdf", plot = macro_reg_dp, width = 6, height = 8, dpi = 600)
+ggsave(filename = "20260120_Reg_Macrophage_Dot_Plot_HU.pdf", plot = macro_reg_dp, width = 6, height = 8, dpi = 600)
   
+  
+
   
 #### Supp Figure 4G ####
 
@@ -906,5 +860,4 @@ table2 <- table(
           axis.text.y = element_text(color = 'black', hjust = 1))              # Text color and horizontal adjustment on y-axis
   
   ggsave(filename = "20251020_epi_pre-cilia_location_stacked_bar.pdf" , plot = y , width = 10, height = 12, dpi =600)
-  
   

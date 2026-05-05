@@ -35,16 +35,45 @@ library(tidyr)
 
 #### Mouse Pseudotime Objects and Analysis ####
 
+Distal_PHATE <- readRDS(file = "Distal_Epi_PHATE.rds" , refhook = NULL)
 
-HQ_Distal_Epi_Filter <- readRDS(file = "20250123_Distal_Epi_Cells_pseudotime.rds", refhook = NULL)
+cds <- readRDS(file = "Distal_Epi_PHATE_Monocle3.rds" , refhook = NULL)
 
+Epi_Filter <- readRDS(file = "20220817_Mouse_Distal_Epi_Cells.rds" , refhook =  NULL)
 
+Epi_Named <- RenameIdents(Epi_Filter, 
+                          '0' = "Spdef+ Secretory", 
+                          '1' = "Slc1a3+ Stem/Progenitor", 
+                          '2' = "Cebpdhigh/Foxj1- Progenitor",
+                          '3' = "Ciliated 1", 
+                          '4' = "Ciliated 2", 
+                          '5' = "Pax8low/Prom1+ Cilia-forming", 
+                          '6' = "Fibroblast-like",
+                          '7' = "Slc1a3med/Sox9+ Cilia-forming",
+                          '8' = "Selenop+/Gstm2high Secretory")
+
+Epi_Named@active.ident <- factor(x = Epi_Named@active.ident, levels = c( c("Slc1a3+ Stem/Progenitor",
+                                                                           "Cebpdhigh/Foxj1- Progenitor",
+                                                                           "Slc1a3med/Sox9+ Cilia-forming",
+                                                                           "Pax8low/Prom1+ Cilia-forming", 
+                                                                           "Fibroblast-like",
+                                                                           "Spdef+ Secretory",
+                                                                           "Selenop+/Gstm2high Secretory",
+                                                                           "Ciliated 1",
+                                                                           "Ciliated 2")))
+                                                                           
 
 ## Psuedotime and Lineage Assignment ##
 
-cellID <- rownames(HQ_Distal_Epi_Filter@reductions$phate@cell.embeddings)
-phate_embeddings <- HQ_Distal_Epi_Filter@reductions$phate@cell.embeddings
-pseudotime_vals <- HQ_Distal_Epi_Filter@meta.data$Pseudotime
+
+pseudo <- pseudotime(cds)
+
+Distal_PHATE@meta.data$Pseudotime <- pseudo # Add to Seurat Metadata
+
+
+cellID <- rownames(Distal_PHATE@reductions$phate@cell.embeddings)
+phate_embeddings <- Distal_PHATE@reductions$phate@cell.embeddings
+pseudotime_vals <- Distal_PHATE@meta.data$Pseudotime
 
 combined_data <- data.frame(cellID, phate_embeddings, pseudotime_vals)
 
@@ -59,12 +88,33 @@ combined_data$lineage <- ifelse(combined_data$phate_1 < avg_phate_1, "Secretory"
                                 ifelse(combined_data$phate_1 > avg_phate_1, "Ciliogenic", "Progenitor"))
 
 
-HQ_Distal_Epi_Filter$Pseudotime_Adj <- combined_data$Split_Pseudo
-HQ_Distal_Epi_Filter$Lineage <- combined_data$lineage
+# Pseudotime Values lower than avge PHATE_1 Embedding will be Negative to split lineages
+combined_data$Split_Pseudo <- ifelse(phate_embeddings[, 1] < avg_phate_1, -pseudotime_vals, pseudotime_vals)
+
+# Define Lineage #
+combined_data$lineage <- ifelse(combined_data$PHATE_1 < avg_phate_1, "Secretory",
+                                ifelse(combined_data$PHATE_1 > avg_phate_1, "Ciliogenic", "Progenitor"))
+
+
+Distal_PHATE$Pseudotime_Adj <- combined_data$Split_Pseudo
+Distal_PHATE$Lineage <- combined_data$lineage
+
+# Subset #
+
+Pseudotime_Lineage <- subset(Distal_PHATE, 
+                             idents = c("Secretory 1",
+                                        "Secretory 2",
+                                        "Msln+ Progenitor",
+                                        "Slc1a3+/Sox9+ Cilia-forming",
+                                        "Pax8+/Prom1+ Cilia-forming",
+                                        "Progenitor",
+                                        "Ciliated 1",
+                                        "Ciliated 2"))
+
+
 
 ## Set Bins ##
 
-Pseudotime_Lineage <- HQ_Distal_Epi_Filter
 
 bins <- cut_number(Pseudotime_Lineage@meta.data$Pseudotime_Adj , 40) # Evenly distribute bins 
 
@@ -110,7 +160,7 @@ ggsave(filename = "Fig4a_epi_phate.pdf", plot = phate_dif, width = 15, height = 
 
 #### Figure 4B ####
 
-cds <- readRDS(file = "20221101_Distal_Epi_PHATE_Monocle3.rds" , refhook = NULL)
+cds <- readRDS(file = "Distal_Epi_PHATE_Monocle3.rds" , refhook = NULL)
 
 pseudtotime <- plot_cells(cds, 
                           color_cells_by = "pseudotime",
@@ -150,7 +200,7 @@ colors <- c(
 
 
 rainbow_pseudo <- DimPlot(Pseudotime_Lineage , reduction = "phate", 
-                          cols = colors2,
+                          cols = colors,
                           pt.size = 0.7,
                           shuffle = TRUE,
                           seed = 0,
@@ -171,26 +221,12 @@ ggsave(filename = "Fig4d_epi_pseudtotime_bins.pdf", plot = rainbow_pseudo, width
 
 
 
-####
-
-
-Distal_Epi_Filter <- readRDS(file = "20241216_Distal_Epi_Cells2.rds", refhook = NULL)
-
-
-SaveRDS(cds_from_seurat, file = "20250123_Distal_Epi_PHATE_monocle.rds")
-
-
-pseudo <- pseudotime(cds_from_seurat)
-
-HQ_Distal_Epi_Filter@meta.data$Pseudotime <- pseudo # Add to Seurat Metadata
-
-saveRDS(HQ_Distal_Epi_Filter, file = "20250123_Distal_Epi_Cells_pseudotime.rds")
 
 #### Figure 4G-1 ####
 
 features <- c('Spdef' , 'Mif' , 
               'Ifitm2' , 'Selenop' ,
-              'Krt7', 'Ovgp11', 'Pax8' , "Slc1a3" , "Itga6",
+              'Krt7', 'Ovgp1', 'Pax8' , "Slc1a3" , "Itga6",
               'Sox5' , 'Klf6' , 'Krt5' , 'Trp53','Trp73',
               "Prom1", "Foxj1" , "Dnah12" , "Cfap126",
               "Tppp3", "Fam183b")
@@ -272,11 +308,46 @@ ggsave(filename = "Fig4g_mo_pseudotime_binned.pdf" , plot = figure , width = 18,
 
 HQ_Distal_Epi_Filter <- readRDS(file = "20250123_Distal_Epi_Cells_pseudotime.rds", refhook = NULL)
 
+HQ_Distal_Epi_Filter <- RenameIdents(HQ_Distal_Epi_Filter, 
+                             'PAX8+/LGR5+ Secretory' = "PAX8+/LGR5+ Progenitor", 
+                             'KRT7+ Secretory' = "KRT7+ Secretory", 
+                             'CFAP299+ Ciliated' = "CFAP299+ Ciliated",
+                             'TPPP3+ Ciliated' = "TPPP3+ Ciliated", 
+                             'KRT5+ Secretory' = "KRT5+ Progenitor", 
+                             'APOA1+ Secretory' = "APOA1+ Progenitor", 
+                             'TEX14+ Secretory' = "TEX14+ Progenitor",
+                             'AGBL4+/MAPK8+ Ciliated' = "AGBL4+/MAPK8+ Pre-ciliated",
+                             'HPSE2+ Secretory' = "HPSE2+ Progenitor")
+
+
+
+HQ_Distal_Epi_Filter@active.ident <- factor(x = HQ_Distal_Epi_Filter@active.ident, 
+                                    levels = 
+                                      c("KRT7+ Secretory", 
+                                        "PAX8+/LGR5+ Progenitor",
+                                        "TEX14+ Progenitor",
+                                        "HPSE2+ Progenitor",
+                                        "APOA1+ Progenitor",
+                                        "KRT5+ Progenitor",
+                                        "AGBL4+/MAPK8+ Pre-ciliated", 
+                                        "CFAP299+ Ciliated",
+                                        "TPPP3+ Ciliated"))
+
+
 #### Figure 4D ####
 
-phate <-  DimPlot(object = Distal_Epi_Named, 
+colors <- c("#B20224", #1
+            '#35EFEF',
+            "#F28D86", #2
+            "#2188F7", #3
+            "#59D1AF", #5
+            '#00A1C6',
+            "#EA68E1", #4
+            "#A374B5", #8
+            "#9000C6") #9
+
+phate <-  DimPlot(object = HQ_Distal_Epi_Filter, 
                   reduction = 'phate', 
-                  group.by = "Sample.ID", 
                   repel = TRUE, 
                   cols = colors,
                   label = F, 
@@ -521,5 +592,8 @@ psuedotime_lineage <- ggarrange(`binning`,
 
 ggsave(filename = "Fig4g_hu_pseudotime_binned_and_annotated.pdf", 
        plot = psuedotime_lineage, width = 16, height = 20, dpi = 600)
+
+
+
 
 

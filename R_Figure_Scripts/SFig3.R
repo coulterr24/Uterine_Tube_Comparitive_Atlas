@@ -210,7 +210,18 @@ ggsave(filename = "202501125_Preservation_human_source_dist.pdf", plot = source,
 
 
 
+
+
 #### Supp Figure 3C ####
+
+
+
+FT_Named$age_group <- cut(FT_Named$Age,
+                              breaks = c(-Inf, 45, 55, Inf),
+                              labels = c("Pre-Menopause", "Peri-Menopause", "Menopause"),
+                              right = TRUE)
+
+FT_Named$age_group <- factor(FT_Named$age_group, levels = c("Pre-Menopause", "Peri-Menopause", "Menopause"))
 
 
 table <- table(FT_Named@meta.data$Source ,
@@ -257,6 +268,7 @@ source <- ggplot(data = df,                # Dataset to use for plot.  Needs to 
         axis.text.y = element_text(color = 'black', hjust = 1))              # Text color and horizontal adjustment on y-axis
 
 ggsave(filename = "202501125_source_human_source_dist.pdf", plot = source, width = 10, height = 14, dpi = 600)
+
 
 
 
@@ -317,7 +329,6 @@ location <- ggplot(data = df,                # Dataset to use for plot.  Needs t
         axis.text.y = element_text(color = 'black', hjust = 1))              # Text color and horizontal adjustment on y-axis
 
 ggsave(filename = "202501125_location_human_source_dist.pdf", plot = location, width = 10, height = 14, dpi = 600)
-
 
 
 

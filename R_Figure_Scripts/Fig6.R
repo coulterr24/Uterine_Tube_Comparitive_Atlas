@@ -32,6 +32,7 @@ library(phateR)
 library(monocle3)
 
 library(tidyr)
+library (UCell)
 
 #### Figure 6A ####
 
@@ -117,15 +118,18 @@ FT_sub <- subset(FT_sub, idents = c("Fibroblast 1",
 
 FT_sub$Location <- factor(FT_sub$Location, levels = c('Isthmus', 'Ampulla', 'Fimbria'))
 
-
+colors <- c('#C71585' , '#8A2BE2' , '#4B00FF')
 
 Fibro_POSTN <- VlnPlot(FT_sub, features = "POSTN", 
                        group.by = 'Location', 
                        pt.size = 0,
-                       cols = hu_colors)
+                       cols = colors)
 
 
 ggsave(filename = "Fig6A_human_fibro_POSTN_vln.pdf" , plot = Fibro_POSTN , width = 15, height = 10, dpi =600)
+
+
+
 
 #### Figure 6C ####
 
@@ -187,6 +191,8 @@ UT_sub$Location <- factor(UT_sub$Location, levels = c('Proximal', 'Distal'))
 UT_sub_POSTN <- VlnPlot(UT_sub, features = "Postn", 
                         group.by = 'Location', 
                         pt.size = 0)
+
+
 
 ggsave(filename = "Fig6C_mouse_fibro_POSTN_vln.pdf" , plot = UT_sub_POSTN , width = 15, height = 10, dpi =600)
 
@@ -419,5 +425,7 @@ psuedotime_lineage <- ggarrange(figure,
 
 ggsave(filename = "Fig6F_pseudotime_maechanotransduction_and_wounding.pdf", 
        plot = psuedotime_lineage, width = 16, height = 20, dpi = 600)
+
+
 
 

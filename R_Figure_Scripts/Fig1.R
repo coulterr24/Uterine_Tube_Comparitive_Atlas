@@ -269,6 +269,7 @@ mo_dp <- DotPlot(object = UT_Named,                    # Seurat object
   coord_flip()
 
 
+
 ggsave(filename = "20260311_FIG1f_all_distal_mouse_dotplot.pdf", plot = mo_dp, width = 10, height = 10, dpi = 600)
 
 
@@ -276,7 +277,7 @@ ggsave(filename = "20260311_FIG1f_all_distal_mouse_dotplot.pdf", plot = mo_dp, w
 
 hu_dp <- DotPlot(object = FT_Named,                    # Seurat object
                   assay = 'RNA',                        # Name of assay to use.  Default is the active assay
-                  features = features,                  # List of features (select one from above or create a new one)
+                  features = hu_features,                  # List of features (select one from above or create a new one)
                   cols =  c('grey','#785AA3'),
                   col.min = 0,                       # Minimum scaled average expression threshold (everything smaller will be set to this)
                   col.max = 2.5,                        # Maximum scaled average expression threshold (everything larger will be set to this)
@@ -301,8 +302,6 @@ hu_dp <- DotPlot(object = FT_Named,                    # Seurat object
   scale_y_discrete(limits = levels(FT_Named))+
   theme(legend.title = element_text(size = 14))+
   coord_flip()
-
-
 
 
 
