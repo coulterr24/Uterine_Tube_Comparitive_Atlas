@@ -24,6 +24,8 @@ The available code investigates the transcriptomic landscape of the human and mo
 
 + `Seurat_Preprocessing`: quality control and object preparation for human datasets and epithelial subsets.
 
++ `Reproducibility`: information necessary to recreate conclusions and to spark further exploration.
+
 ## Contact:
 Coulter Q. Ralston (cqr3@cornell.edu) <br>
 Alexander Yu. Nikitin (an58@cornell.edu) <br>
