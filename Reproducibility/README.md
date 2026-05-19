@@ -1,22 +1,23 @@
 # Data Processing and Analysis Pseudocode Pipeline
 
 ### Raw Data Alignment
-**CellRanger** (v6.1.2, 10x Genomics): [tutorial](https://www.10xgenomics.com/support/software/cell-ranger/latest/tutorials/cr-tutorial-ct) <br>
+**CellRanger** (v.7.1.0, 10x Genomics): [tutorial](https://www.10xgenomics.com/support/software/cell-ranger/latest/tutorials/cr-tutorial-ct) <br>
 Within a linux terminal and with CellRanger downloaded with the proper file paths, run the count command to process raw scRNA-seq reads <br>
 `cellranger count --id=run_count_1kpbmcs \
    --fastqs=/path_to/uterine_tube1_fastqs \
    --sample=uterine_tube1 \
-   --transcriptome=/path_to/mm39_ref_genome` <br> <br>
+   --transcriptome=/path_to/tanscriptome` <br> <br>
 
 Note: This is computationally intensive for most standard computers. If you are on a local PC, I would advise starting from the processed gene count matrices or the prepared Seurat Objects
 
 ### Setting Up R and RStudio
-Install R (v.4.1.1) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min <br> <br>
+Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min <br> <br>
 
-Install packages found in the 'sessionInfo.txt' with proper versions to properly recreate the figures: approximately 60 min <br> <br>
+Install packages found in the 'sessionInfo.txt' with proper versions to properly recreate the figures: approximately 90 min <br> <br>
 
-### Preprocessing Distal and Proximal Objects
-Refer to code in `MouseTE_scRNA/Data_Preprocessing/` to reproduce preproccessing results <br> <br>
+### Preprocessing Mouse and Human Objects
+Refer to code in `coulterr24/MouseTE_scRNA/tree/main/Data_Preprocessing/` to reproduce preproccessing results for mice <br>
+Refer to code in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/Seurat_Preprocessing/` to reproduce preproccessing results for human <br> <br>
 #### Distal and Proximal Objects for All Cells
 Use `MouseTE_scRNA_Metadata.csv` to identify sample file directories and additional meta data <br>
 `SC_Mouse_Distal_Data_Preparation.R` and `SC_Mouse_Distal_Data_Preparation.R` will go step by step for removing ambient RNA signals with **SoupX** (v.1.6.1), identifying doublets with **DoubletFinder** (v.2.0.3), and preparing integrated/batch-corrected objects with **Seurat** (v.4.1.1) and **harmony** (v.0.1.0).
