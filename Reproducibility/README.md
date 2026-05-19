@@ -55,6 +55,18 @@ Now that the objects are available, try recreating the figures from the manuscri
 
 Each figure should take only about 2-10 minutes to recreate with the properly loaded objects and packages <br>
 
-If there are any issues with certain packages, refer to 'sessionInfo.txt' to ensure that versions match. <br>
+If there are any issues with certain packages, refer to 'RsessionInfo.txt' to ensure that versions match. <br>
 
-Feel free to explore beyond the figures and delve into other cell types as well :)
+### Generation of Human and Mouse Objects in SAMap
+With both human and mouse Seurat objects available, we can move to python-based SAMap for cross-species mapping. Downloading and preparation of materials for SAMap was conducted as the pipeline states at `https://github.com/atarashansky/SAMap`.
+
+The initial BLAST mapping between mouse and human trascriptomes was computed with `tblastx` for mouse and human transcriptomes. This step can be computationally demanding taking about 3 days with larger annotated transcriptomes, and the output consists for two files each about 3 GB.
+
+With **sam-algorithm** (v.1.0.2) and **samap** (v.1.0.12), the scRNA-seq data from humans and mice were prepared with there Seurat annotations based on the code provided in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/SAMap_Preprocessing_and_Figures`. This step takes about 3-4 hours to fully complete. To skip this step, prepared SAMap objects are avaiable for download at [Dryad](https://doi.org/10.5061/dryad.zs7h44jr5) [active upon publication].
+
+The files in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/SAMap_Preprocessing_and_Figures` also enables figure generation. After downloading the prepared SAMap file, step-by-step code will allow for figure recreation within 2-10 minutes.
+
+### Comparison between Human and Mouse Epithelial Cells based on SAMap
+The preprocessing code includes generation of upregulated genes for each mouse and human epithelial cell state. These data were exported as csv files and are available in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/Correlation_Analysis`. Here, SAMap correlation scores were calculated for each gene and output as `20251205_Conservation_Reference_Genes_for MvH_DP.xlsx`. THese data can be interrogated for further correlated gene detection with promise of translatability.
+
+
