@@ -24,7 +24,7 @@ Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starti
 
 Install packages found in the `RSessionInfo.txt` with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
 
-### Setting Up python and RStudio
+### Setting Up python and jupyter notebook
 Install python (v.3.10.8) and jupyter notebook (https://jupyter.org/install): approximately 15-30 min. <br> <br>
 
 Install packages found in the `pySessionInfo.txt` with proper versions to properly recreate the figures: approximately 30 min. <br> <br>
