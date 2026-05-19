@@ -25,9 +25,9 @@ Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starti
 Install packages found in the `RSessionInfo.txt` with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
 
 ### Setting Up python and RStudio
-Install python (3.10.8) and jupyter notebook (https://jupyter.org/install): approximately 15-30 min. <br> <br>
+Install python (v.3.10.8) and jupyter notebook (https://jupyter.org/install): approximately 15-30 min. <br> <br>
 
-Install packages found in the 'pySessionInfo.txt' with proper versions to properly recreate the figures: approximately 30 min. <br> <br>
+Install packages found in the `pySessionInfo.txt` with proper versions to properly recreate the figures: approximately 30 min. <br> <br>
 
 ### Preprocessing Mouse and Human Objects
 Refer to code in `coulterr24/MouseTE_scRNA/tree/main/Data_Preprocessing/` to reproduce preproccessing results for mice. <br>
