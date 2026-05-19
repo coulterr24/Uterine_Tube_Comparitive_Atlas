@@ -43,7 +43,7 @@ Use `Human_FT_Healthy_meta.csv` found in `coulterr24/Uterine_Tube_Comparitive_At
 Within `coulterr24/MouseTE_scRNA/tree/main/Data_Preprocessing/`, `SC_Mouse_Distal_Epithelial_Preparation.R` and `SC_Mouse_Proximal_Epithelial_Preparation.R` will go further to subset epithelial cells. <br>
 Epithelial cells were identified by clusters that expressed *Krt8* and *Epcam* (common epithelial gene markers).<br>
 After characterization of epithelial cell states, **phateR** (v.1.0.7) and **Monocle3** (v.1.2.7) were used in the distal dataset to infer differentiation trajectories withen the distal tubal epithelium. <br>
-Final objects for all mouse datasets were created within the preprocessing scripts. These scripts are also available for download on [Dryad](https://doi.org/10.5061/dryad.4mw6m90hm) [active upon publication].
+Final objects for all mouse datasets were created within the preprocessing scripts. These scripts are also available for download on [Dryad](https://doi.org/10.5061/dryad.4mw6m90hm).
 #### Subsetting Epithelial Cells from Human Objects
 Within  `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/Seurat_Preprocessing/`, `SC_Mouse_Distal_Epithelial_Preparation.R` and `SC_Mouse_Proximal_Epithelial_Preparation.R` will go further to subset epithelial cells. <br>
 Epithelial cells were identified by clusters that expressed *KRT8* and *EPCAM* (common epithelial gene markers).<br>
