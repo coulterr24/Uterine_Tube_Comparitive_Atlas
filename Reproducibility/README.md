@@ -67,6 +67,6 @@ With **sam-algorithm** (v.1.0.2) and **samap** (v.1.0.12), the scRNA-seq data fr
 The files in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/SAMap_Preprocessing_and_Figures` also enables figure generation. After downloading the prepared SAMap file, step-by-step code will allow for figure recreation within 10-30 minutes.
 
 ### Comparison between Human and Mouse Epithelial Cells based on SAMap
-The preprocessing code includes generation of upregulated genes for each mouse and human epithelial cell state. These data were exported as csv files and are available in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/Correlation_Analysis`. Here, SAMap correlation scores were calculated for each gene and output as `20251205_Conservation_Reference_Genes_for MvH_DP.xlsx`. THese data can be interrogated for further correlated gene detection with promise of translatability.
+The preprocessing code includes generation of upregulated genes for each mouse and human epithelial cell state. These data were exported as csv files and are available in `coulterr24/Uterine_Tube_Comparitive_Atlas/tree/main/Correlation_Analysis`. Here, SAMap correlation scores were calculated for each gene and output as `20251205_Conservation_Reference_Genes_for MvH_DP.xlsx`. These data can be interrogated for further correlated gene detection with promise of translatability.
 
 
