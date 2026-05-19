@@ -1,4 +1,12 @@
-# Data Processing and Analysis Pseudocode Pipeline
+# Data Download, Alignment, Processing, and Comparison Pipeline 
+
+### Data Download
+In addition to our own collected mouse [GSE252786](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE252786) and human [GSE324855](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi) samples available for download. We downloaded human data from the following sources:
+   +  Dinh et al [GSE151214](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151214)
+   +  Ulrich et al [GSE178101](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178101)
+   +  Lengyel et al [EGAC00001003114](https://ega-archive.org/datasets/EGAD00001010076) <br>
+
+To download from the GEne
 
 ### Raw Data Alignment
 **CellRanger** (v.7.1.0, 10x Genomics): [tutorial](https://www.10xgenomics.com/support/software/cell-ranger/latest/tutorials/cr-tutorial-ct) <br>
@@ -10,7 +18,13 @@ Within a linux terminal and with CellRanger downloaded with the proper file path
 
 Note: This is computationally intensive for most standard computers. If you are on a local PC, I would advise starting from the processed gene count matrices or the prepared Seurat Objects.
 
+
 ### Setting Up R and RStudio
+Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min. <br> <br>
+
+Install packages found in the 'sessionInfo.txt' with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
+
+### Setting Up python and RStudio
 Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min. <br> <br>
 
 Install packages found in the 'sessionInfo.txt' with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
