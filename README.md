@@ -19,12 +19,13 @@ The available code investigates the transcriptomic landscape of the human and mo
 + `Correlation_Analysis`: csv and xlsx files required for establishing a reference of correlated/specific gene pairs.
 
 + `R_Figure_Scripts`: code necessary for recreating figures from the manuscript.
+  
++ `Reproducibility`: information necessary to recreate conclusions and to spark further exploration.
 
 + `SAMap_Preprocessing_and_Figures`: code for the preparation of SAMap objects and recreating figures from the manuscript.
 
 + `Seurat_Preprocessing`: quality control and object preparation for human datasets and epithelial subsets.
 
-+ `Reproducibility`: information necessary to recreate conclusions and to spark further exploration.
 
 ## Contact:
 Coulter Q. Ralston (cqr3@cornell.edu) <br>
