@@ -6,7 +6,7 @@ In addition to our own collected mouse [GSE252786](https://www.ncbi.nlm.nih.gov/
    +  Ulrich et al [GSE178101](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178101)
    +  Lengyel et al [EGAC00001003114](https://ega-archive.org/datasets/EGAD00001010076) <br>
 
-To download large datasets at once, using the Eurpean Nucleotide Archive (ENA) enables the 'wget' function for accesion numbers found in the Gene Expression Omnibus (GEO) BioProject ID. Pseudocode for downloading from a large prject with multiple scRNA-seq samples is provided as 'ENA_Downloader.sh'. <br><br>
+To download large datasets at once, using the Eurpean Nucleotide Archive (ENA) enables the 'wget' function for accesion numbers found in the Gene Expression Omnibus (GEO) BioProject ID. Pseudocode for downloading from a large prject with multiple scRNA-seq samples is provided as `ENA_Downloader.sh`. <br><br>
 
 ### Raw Data Alignment
 **CellRanger** (v.7.1.0, 10x Genomics): [tutorial](https://www.10xgenomics.com/support/software/cell-ranger/latest/tutorials/cr-tutorial-ct) <br>
@@ -22,12 +22,12 @@ Note: This is computationally intensive for most standard computers. If you are 
 ### Setting Up R and RStudio
 Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min. <br> <br>
 
-Install packages found in the 'SessionInfo.txt' with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
+Install packages found in the `RSessionInfo.txt` with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
 
 ### Setting Up python and RStudio
-Install R (v.4.2.0) and Rstudio (https://rstudio-education.github.io/hopr/starting.html): approximately 15-30 min. <br> <br>
+Install python (3.10.8) and jupyter notebook (https://jupyter.org/install): approximately 15-30 min. <br> <br>
 
-Install packages found in the 'sessionInfo.txt' with proper versions to properly recreate the figures: approximately 90 min. <br> <br>
+Install packages found in the 'pySessionInfo.txt' with proper versions to properly recreate the figures: approximately 30 min. <br> <br>
 
 ### Preprocessing Mouse and Human Objects
 Refer to code in `coulterr24/MouseTE_scRNA/tree/main/Data_Preprocessing/` to reproduce preproccessing results for mice. <br>
